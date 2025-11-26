@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Joudy!</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --rose-50: #fff1f2;
+            --rose-100: #ffe4e6;
+            --rose-500: #f43f5e;
+            --gold: #d4af37;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--rose-50);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .fancy-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Floating Hearts Animation */
+        .floating-heart {
+            position: absolute;
+            color: rgba(244, 63, 94, 0.2);
+            animation: float 15s infinite linear;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Image Hover Effects */
+        .photo-card {
+            transition: all 0.5s ease;
+            overflow: hidden;
+        }
+        .photo-card img {
+            transition: transform 0.7s ease;
+        }
+        .photo-card:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fff1f2; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #fda4af; 
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f43f5e; 
+        }
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            will-change: opacity, visibility;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Audio Element (Hidden) - Replace 'music.mp3' with a real URL -->
+    <audio id="bgMusic" loop>
+        <!-- Suggestion: Upload a song to a host or use a direct link -->
+        <source src="./Die With A Smile - Lady Gaga.mp3" type="audio/mp3">
+    </audio>
+
+    <!-- Floating Background Hearts -->
+    <div id="hearts-container" class="fixed inset-0 pointer-events-none overflow-hidden h-full w-full"></div>
+
+    <!-- Navigation / Music Control -->
+    <nav class="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center glass-card">
+        <div class="text-2xl font-bold text-rose-500 fancy-font font-bold tracking-widest">Joudy </div>
+        <button id="musicBtn" onclick="toggleMusic()" class="flex items-center gap-2 bg-rose-500 text-white px-4 py-2 rounded-full hover:bg-rose-600 transition shadow-lg hover:shadow-rose-300/50">
+            <i data-lucide="music" class="w-4 h-4"></i>
+            <span id="musicText">Play Our Song</span>
+        </button>
+        
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative min-h-screen flex flex-col justify-center items-center text-center px-4 pt-16">
+        <div class="absolute inset-0 bg-gradient-to-b from-rose-100/50 to-rose-50 z-0"></div>
+        
+        <div class="z-10 relative space-y-6 max-w-4xl mx-auto fade-in-section is-visible">
+            <span class="text-rose-500 tracking-[0.3em] text-sm uppercase font-bold"><br>Today is specialized for you</span>
+            <h1 class="text-6xl md:text-8xl text-gray-900 leading-tight fancy-font">
+                Happy Birthday <br>
+                <span class="text-rose-500 italic">Joudy</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 font-light max-w-2xl mx-auto mt-4">
+                To my beautiful Jojo, the queen of my heart and the joy of my world.
+            </p>
+            
+            <div class="pt-8">
+                <button onclick="scrollToSection('letter')" class="animate-bounce bg-white text-rose-500 border border-rose-200 px-8 py-3 rounded-full hover:bg-rose-50 transition shadow-lg">
+                    Start the Experience ↓
+                </button>
+            </div>
+        </div>
+        
+        <!-- Hero Image (Optional main photo of her) -->
+        <div class="mt-12 relative z-10 w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-8 border-white shadow-2xl mx-auto fade-in-section">
+            <!-- REPLACE THIS SRC WITH HER BEST PHOTO -->
+            <img src="./jjjj.jpg" 
+                 alt="Joudy" class="w-full h-full object-cover">
+        </div>
+    </header>
+
+    <!-- LETTER SECTION -->
+    <section id="letter" class="py-24 px-4 bg-white relative">
+        <div class="max-w-3xl mx-auto glass-card p-8 md:p-12 rounded-3xl shadow-xl border-t-4 border-rose-500 fade-in-section">
+            <div class="text-center mb-8">
+                <i data-lucide="heart" class="w-12 h-12 text-rose-500 mx-auto fill-current animate-pulse"></i>
+            </div>
+            <h2 class="text-4xl text-center mb-8 fancy-font text-gray-800">My Love, Joudy,</h2>
+            <div class="prose prose-lg mx-auto text-gray-600 leading-relaxed space-y-4 font-light text-lg">
+                <p>
+                    Here I am, writing this straight from my heart on the second birthday we’ve celebrated together. 
+                </p>
+                <p>
+                    Babe, words can't even begin to show how much I love you. Even with the arguments we've had these last few days, my feelings haven't changed a bit. I still love you, and I will <em>always</em> love you.
+                </p>
+                <p>
+                    My sweetheart is turning 16 today! Happy 16th Birthday, babe. I wish you endless years of love and happiness, and may every single one of your dreams come true.
+                </p>
+                <p>
+                    Happy Birthday, my Queen. From the second you entered my life, my world became brighter, warmer, and happier because of you.
+                </p>
+                <p class="text-right font-bold text-rose-500 fancy-font text-2xl mt-8">- Forever Yours</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION (HER PHOTOS) -->
+    <section class="py-24 px-4 bg-rose-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 fade-in-section">
+                <span class="text-rose-500 uppercase tracking-widest font-bold text-xs">The Muse</span>
+                <h2 class="text-5xl fancy-font mt-2 text-gray-900">The Beautiful Birthday Girl</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <!-- Photo 1 -->
+<div class="photo-card rounded-2xl shadow-lg relative h-96 group fade-in-section">
+    <!-- FIXED: Removed the "/" at the start -->
+    <img src="./cutiee.jpg" 
+         class="w-full h-full object-cover" alt="Jojo 1">
+    <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+        <span class="text-white fancy-font text-2xl">Radiant</span>
+    </div>
+</div>
+
+               <!-- Photo 2 -->
+<div class="photo-card rounded-2xl shadow-lg relative h-96 group fade-in-section md:mt-12">
+    <!-- FIXED: Removed the "/" at the start -->
+    <img src="./elegant.jpg" 
+         class="w-full h-full object-cover" alt="Jojo 2">
+    <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+        <span class="text-white fancy-font text-2xl">Elegant</span>
+    </div>
+</div>
+
+               <!-- Photo 3 -->
+<div class="photo-card rounded-2xl shadow-lg relative h-96 group fade-in-section">
+    <!-- FIXED: Removed the "/" at the start -->
+    <img src="./mylove.jpg" 
+         class="w-full h-full object-cover" alt="Jojo 3">
+    <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+        <span class="text-white fancy-font text-2xl">My Love</span>
+    </div>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRIPS & MEMORIES SECTION -->
+    <section class="py-24 px-4 bg-white">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16 fade-in-section">
+                <span class="text-rose-500 uppercase tracking-widest font-bold text-xs">Our Journey</span>
+                <h2 class="text-5xl fancy-font mt-2 text-gray-900">Our Adventures Together</h2>
+            </div>
+
+            <div class="space-y-20">
+                
+
+
+                <!-- Trip 2 (Right Aligned) -->
+                <div class="flex flex-col md:flex-row-reverse items-center gap-10 fade-in-section">
+                    <div class="w-full md:w-1/2 h-80 photo-card rounded-3xl shadow-xl overflow-hidden -rotate-2">
+                        <!-- REPLACE SRC WITH TRIP PHOTO -->
+                        <img src="./second meet.jpg" 
+                             class="w-full h-full object-cover" alt="Trip 2">
+                    </div>
+                    <div class="w-full md:w-1/2 text-center md:text-right">
+                        <div class="text-rose-500 font-bold mb-2">February 22 ,2025 </div>
+                        <h3 class="text-3xl fancy-font mb-4"></h3>
+                        <p class="text-gray-600">Our second date, but it was special one  Stepping into <strong>The Club Cafe</strong>—your favorite spot—for the very first time. Since it was only the second time seeing each other in real life, we were both a little shy and embarrassed at first. But as we talked for hours, that nervous excitement turned into a beautiful memory.</p>
+                    </div>
+                </div>
+
+
+                <!-- Trip 1 (Left Aligned) -->
+                <div class="flex flex-col md:flex-row items-center gap-10 fade-in-section">
+                    <div class="w-full md:w-1/2 h-80 photo-card rounded-3xl shadow-xl overflow-hidden rotate-2">
+                        <!-- REPLACE SRC WITH TRIP PHOTO -->
+                        <img src="./first meet.jpg" 
+                             class="w-full h-full object-cover" alt="Trip 1">
+                    </div>
+                    <div class="w-full md:w-1/2 text-center md:text-left">
+                        <div class="text-rose-500 font-bold mb-2">April 8, 2025</div> <!-- Fixed the comma space -->
+    <h3 class="text-3xl fancy-font mb-4">First Meal Together</h3>
+    <p class="text-gray-600">
+        Our third date, but a day of so many "firsts." Sharing our first pizza, that first drink together, and  It was even our first taxi ride together. It was a lovely day where we truly made the moment ours.
+    </p>
+                    </div>
+                </div>
+
+                <!-- Trip 2 (Right Aligned) -->
+                <div class="flex flex-col md:flex-row-reverse items-center gap-10 fade-in-section">
+                    <div class="w-full md:w-1/2 h-80 photo-card rounded-3xl shadow-xl overflow-hidden -rotate-2">
+                        <!-- REPLACE SRC WITH TRIP PHOTO -->
+                        <img src="./in car.jpg" 
+                             class="w-full h-full object-cover" alt="Trip 2">
+                    </div>
+                    <div class="w-full md:w-1/2 text-center md:text-right">
+                        <div class="text-rose-500 font-bold mb-2"></div>
+                        <h3 class="text-3xl fancy-font mb-4"></h3>
+                        <p class="text-gray-600"></p>
+                    </div>
+                </div>
+
+                <!-- Trip 3 (Left Aligned) -->
+               <div class="flex flex-col md:flex-row items-center gap-10 fade-in-section">
+    <div class="w-full md:w-1/2 h-80 photo-card rounded-3xl shadow-xl overflow-hidden rotate-1">
+        
+        <!-- FIXED LINE BELOW: Changed "/" to "./" -->
+        <img src="./after grc.jpg" 
+             class="w-full h-full object-cover" alt="Trip 3">
+             
+    </div>
+    <div class="w-full md:w-1/2 text-center md:text-left">
+        <div class="text-rose-500 font-bold mb-2">May 4, 2025</div>
+        <h3 class="text-3xl fancy-font mb-4">Celebration & Reconnection</h3>
+        <p class="text-gray-600">Two days after my GRC robotics competition, I just wanted to be with you. We walked, ate, and talked for hours. But this day was special for another reason: it was where we found our way back to each other. After a rough patch, this date healed us, ending the arguments and making us stronger than ever ,BTW it was the first time to try her favourite drink : <b>"MilkShake Pistachio"</b>.</p>
+    </div>
+</div>
+
+
+ <!-- Trip 2 (Right Aligned) -->
+              <div class="flex flex-col md:flex-row-reverse items-center gap-10 fade-in-section">
+    <div class="w-full md:w-1/2 h-80 photo-card rounded-3xl shadow-xl overflow-hidden -rotate-2">
+        
+        <!-- FIXED: Added "." to the path -->
+        <img src="./celebrate.jpg" 
+             class="w-full h-full object-cover" alt="Celebration Date">
+             
+    </div>
+    <div class="w-full md:w-1/2 text-center md:text-right">
+        <div class="text-rose-500 font-bold mb-2"></div>
+        <h3 class="text-3xl fancy-font mb-4"></h3>
+        <p class="text-gray-600">
+         
+        </p>
+    </div>
+</div>
+
+<!-- Trip 1 (Left Aligned) -->
+                <div class="flex flex-col md:flex-row items-center gap-10 fade-in-section">
+                    <div class="w-full md:w-1/2 h-80 photo-card rounded-3xl shadow-xl overflow-hidden rotate-2">
+                        <!-- REPLACE SRC WITH TRIP PHOTO -->
+                        <img src="./cinema.jpg" 
+                             class="w-full h-full object-cover" alt="Trip 1">
+                    </div>
+                    <div class="w-full md:w-1/2 text-center md:text-left">
+                        <div class="text-rose-500 font-bold mb-2">June 2 , 2025</div>
+                        <h3 class="text-3xl fancy-font mb-4">Cinema</h3>
+                        <p class="text-gray-600">
+Our first time entering the cinema together to watch <em>Final Destination: Bloodlines</em>. The movie was thrilling, but the real excitement was sharing this new experience with you , as we ate <b>Shawrma</b> for the first time . You looked absolutely stunning that day. Sitting there beside you, you didn't just share popcorn—you completely stole my heart.                        </p>
+                    </div>
+                </div>
+                 <!-- Trip 4(Right Aligned) -->
+                <div class="flex flex-col md:flex-row-reverse items-center gap-10 fade-in-section">
+                    <div class="w-full md:w-1/2 h-80 photo-card rounded-3xl shadow-xl overflow-hidden -rotate-2">
+                        <!-- REPLACE SRC WITH TRIP PHOTO -->
+                        <img src="./fourth.jpg" 
+                             class="w-full h-full object-cover" alt="Trip 2">
+                    </div>
+                    <div class="w-full md:w-1/2 text-center md:text-right">
+                        <div class="text-rose-500 font-bold mb-2">June 19 ,2025</div>
+                        <h3 class="text-3xl fancy-font mb-4">Art & Warmth at Era</h3>
+                        <p class="text-gray-600">
+We tried a new cozy spot called Era, where we spent the time painting and exchanged our fingerprints on paper to seal the memory forever. On our walk afterwards, holding your hand gave me a feeling I’ve never felt before—pure safety and warmth. This day was incredibly special to me. I love you, Joudy.
+                        </p>
+                    </div>
+                </div>
+
+                 <!-- Trip 5 (Left Aligned) -->
+                <div class="flex flex-col md:flex-row items-center gap-10 fade-in-section">
+                    <div class="w-full md:w-1/2 h-80 photo-card rounded-3xl shadow-xl overflow-hidden rotate-1">
+                        <!-- REPLACE SRC WITH TRIP PHOTO -->
+                        <img src="./blue jacket 4th.jpg" 
+                             class="w-full h-full object-cover" alt="Trip 3">
+                          
+                    </div>
+                    <div class="w-full md:w-1/2 text-center md:text-left">
+                        <div class="text-rose-500 font-bold mb-2"></div>
+                        <h3 class="text-3xl fancy-font mb-4"></h3>
+                        <p class="text-gray-600"></p>
+                    </div>
+                </div>
+                  <!-- Trip 6 (Right Aligned) -->
+<div class="flex flex-col md:flex-row-reverse items-center gap-10 fade-in-section">
+    <div class="w-full md:w-1/2 h-80 photo-card rounded-3xl shadow-xl overflow-hidden -rotate-2">
+        
+        <!-- FIXED: I removed the "/" and added "." so it looks in the current folder -->
+        <img src="./standing dexter behind.jpg" 
+             class="w-full h-full object-cover" alt="Trip 2">
+             
+    </div>
+    <div class="w-full md:w-1/2 text-center md:text-right">
+        <div class="text-rose-500 font-bold mb-2">July 30 , 2025</div>
+        <h3 class="text-3xl fancy-font mb-4">Playstaion</h3>
+        <p class="text-gray-600">
+A very special first: playing PlayStation together! We battled it out in FIFA, and while it was a beautiful experience sharing my hobby with you... I have to mention that I won (of course! 😉). But honestly, just playing by your side made me feel like the real winner.        </p>
+    </div>
+</div>
+</div>
+
+<!-- Trip 7 (Left Aligned) -->
+                <div class="flex flex-col md:flex-row items-center gap-10 fade-in-section">
+                    <div class="w-full md:w-1/2 h-80 photo-card rounded-3xl shadow-xl overflow-hidden rotate-1">
+                        <!-- REPLACE SRC WITH TRIP PHOTO -->
+                        <img src="./sixth meet sitting.jpg" 
+                             class="w-full h-full object-cover" alt="Trip 3">
+                          
+                    </div>
+                    <div class="w-full md:w-1/2 text-center md:text-left">
+                        <div class="text-rose-500 font-bold mb-2">September 15 , 2025</div>
+                        <h3 class="text-3xl fancy-font mb-4">The Best Vibes</h3>
+                        <p class="text-gray-600">I think this was our best day yet. We started with our favorite milkshakes at The Club, then found a spot to play FIFA and Call of Duty. I have to mention the score... <strong>10-1</strong> (I won as usual! 😉).
+        </p>
+        <p class="text-gray-600 mt-2">
+            But the best part was ending the night eating pizza and hyping up over <em>Dexter</em> on Netflix. Sitting beside you, laughing and just enjoying the moment, made me realize all over again how deeply I love you.
+        </p>
+                    </div>
+                </div>
+                
+     <!-- Trip 7(Right Aligned) -->
+<div class="flex flex-col md:flex-row-reverse items-center gap-10 fade-in-section">
+    <div class="w-full md:w-1/2 h-80 photo-card rounded-3xl shadow-xl overflow-hidden -rotate-2">
+        
+        <!-- FIXED: I removed the "/" and added "." so it looks in the current folder -->
+        <img src="./grey shirt 6th.jpg" 
+             class="w-full h-full object-cover" alt="Trip 2">
+             
+    </div>
+    <div class="w-full md:w-1/2 text-center md:text-right">
+        <div class="text-rose-500 font-bold mb-2"></div>
+        <h3 class="text-3xl fancy-font mb-4"></h3>
+        <p class="text-gray-600"></p>
+    </div>
+</div>
+
+
+  
+</div>
+
+
+  
+
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE CAKE / WISH SECTION -->
+    <section class="py-32 px-4 relative bg-rose-900 text-white overflow-hidden text-center">
+        <!-- Decorative blobs -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-rose-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+
+        <div class="relative z-10 max-w-2xl mx-auto fade-in-section">
+            <h2 class="text-5xl fancy-font mb-8">Make a Wish, Jojo!</h2>
+            <p class="text-xl text-rose-100 mb-12">Close your eyes, think of your biggest dream, and press the button below.</p>
+            
+            <button onclick="celebrate()" class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-rose-900 transition-all duration-200 bg-white font-pj rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-900 hover:scale-105 shadow-2xl shadow-rose-500/50">
+                <i data-lucide="sparkles" class="mr-2 w-5 h-5 text-yellow-500"></i>
+                Blow The Candles
+                <div class="absolute -inset-3 rounded-xl bg-white/20 opacity-0 group-hover:opacity-100 transition duration-200 blur-lg"></div>
+            </button>
+
+            <div id="hidden-message" class="hidden mt-12 transition-all duration-1000 transform translate-y-4">
+                <p class="text-3xl fancy-font text-rose-200 italic">"I love you more than words can say. Happy Birthday!"</p>
+                <div class="mt-4 flex justify-center gap-4">
+                    <span class="text-4xl">❤️</span>
+                    <span class="text-4xl">🎂</span>
+                    <span class="text-4xl">🥳</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-rose-950 text-rose-200 py-8 text-center">
+        <p class="fancy-font text-lg">Made with infinite love by your LOVE "(Tofyy)"</p>
+        <p class="text-sm opacity-50 mt-2">&copy; 2025 For Joudy</p>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Music Player Logic
+        const musicBtn = document.getElementById('musicBtn');
+        const bgMusic = document.getElementById('bgMusic');
+        const musicText = document.getElementById('musicText');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicText.innerText = "Play Our Song";
+                musicBtn.classList.remove('animate-pulse');
+            } else {
+                bgMusic.play();
+                musicText.innerText = "Pause Music";
+                musicBtn.classList.add('animate-pulse');
+            }
+            isPlaying = !isPlaying;
+        }
+
+        // Floating Hearts Logic
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.animationDuration = Math.random() * 5 + 5 + 's';
+            
+            document.getElementById('hearts-container').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 10000);
+        }
+
+        setInterval(createHeart, 500);
+
+        // Scroll Animation Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth Scroll
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Celebration Confetti
+        function celebrate() {
+            const duration = 3000;
+            const animationEnd = Date.now() + duration;
+            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            const interval = setInterval(function() {
+                const timeLeft = animationEnd - Date.now();
+
+                if (timeLeft <= 0) {
+                    return clearInterval(interval);
+                }
+
+                const particleCount = 50 * (timeLeft / duration);
+                
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+
+            // Show hidden message
+            const msg = document.getElementById('hidden-message');
+            msg.classList.remove('hidden');
+            setTimeout(() => {
+                msg.classList.remove('translate-y-4');
+            }, 100);
+        }
+
+        // NEW: Relationship Timer Logic
+        // IMPORTANT: CHANGE THE DATE BELOW TO WHEN YOU MET/STARTED DATING
+        const startDate = new Date("2022-05-15T00:00:00"); 
+
+        function updateTimer() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer(); // Initial call
+    </script>
+</body>
+</html>
